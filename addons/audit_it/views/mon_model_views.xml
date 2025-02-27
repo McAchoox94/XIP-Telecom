@@ -1,0 +1,1032 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Ici, on définit les vues qui sont associées au modèle audit_it.audit
+Ca peut être des formulaires, des listes, kanbans, etc.
+Ca permet de structurer l'interface utilisateur pour la gestion des données du modèle
+**
+On peut aussi y ajouter des menus et actions liées entre le menu et le modèle-->
+
+
+<odoo>
+    <record id="view_audit_form" model="ir.ui.view">
+        <field name="name">audit.form</field>
+        <field name="model">audit_it.audit</field>
+        <field name="arch" type="xml">
+            <form string="Mon Modèle">
+                <sheet>
+                    <notebook>
+
+
+<!-- Onglet Identité -->
+<!-- ############### -->
+
+                        <page string="Identité">
+
+<!-- Type de contact -->                        
+                                <FIELD/><separator string="Type de contact"/><FIELD/>
+                            <group col="5">
+                                <group colspan="1">
+                                    <field name="contact_prospection_physique"/>
+                                </group>    
+                                <group colspan="1">    
+                                    <field name="contact_phoning"/>
+                                </group>
+                                <group colspan="1">
+                                    <label for="contact_rdv_perso" string="RDV personnel" />
+                                    <field name="contact_rdv_perso" nolabel="1"/>
+                                </group>    
+                                <group colspan="1">
+                                    <label for="contact_rdv_callcenter" string="RDV call center" />
+                                    <field name="contact_rdv_callcenter" nolabel="1"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="contact_autre"/>
+                                </group>                                
+                            </group>
+
+<!-- Identité -->                            
+                                <FIELD/><separator string="Identité"/><FIELD/>
+                            <group>
+                                <field name="contact_individual_id"/>
+                            </group>
+                            <group>
+                                <field name="raison_sociale"/>
+                                <field name="adresse"/>   
+                            </group>    
+
+                            <group>
+                                <group>
+                                    <field name="cp"/>
+                                    <field name="telephone"/>
+                                    <field name="email"/>                
+                                </group>
+                                <group>
+                                    <field name="ville"/>
+                                    <field name="telecopie"/>
+                                    <field name="site_web"/>
+                                </group>    
+                            </group>
+
+
+                            <group col="6">
+                                <group coslpan="1">                                                                                                                                                                                                                                                                                                                                                                  
+                                    <field name="effectif"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="eff_1_9"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="eff_10_24"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="eff_25_49"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="eff_50_99"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="eff_100_500"/>
+                                </group>                                                                                                                                  
+                            </group>
+
+                            <group>
+                                    <field name="nom_contact"/>
+                                    <field name="fonction"/>
+                            </group>
+
+                            <group col="2">                                   
+                                <div>
+                                    <strong for="telephone_contact">Téléphone (ligne directe)</strong>
+                                    <field name="telephone_contact" nolabel="1" style="width: auto;"/>
+                                </div>
+                                <group colspan="1">
+                                    <field name="email_contact"/>
+                                </group>    
+                            </group>                    
+                        </page>
+
+
+<!-- Onglet Téléphone -->
+<!-- ############### -->
+
+                        <page string="Téléphone">
+
+<!-- Infrastructure télécom -->                        
+                                <FIELD/><separator string="Infrastructure telecom"/><FIELD/>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Avez-vous une installation téléphonique</strong>
+                                        <field name="is_install_telephonique" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="3">    
+                                <group colspan="1">
+                                    <field name="inst_tel_pabx"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="inst_tel_ipbx"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="inst_tel_centrex"/>
+                                </group> 
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Etes-vous propriétaire de votre installation</strong>
+                                        <field name="is_telecom_prop" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Etes-vous locataire de votre installation</strong>
+                                        <field name="is_telecom_loc" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Si locataire, depuis quand</strong>
+                                        <field name="loc_telecom_depuis" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>  
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Quelle est la durée de votre contrat de location</strong>
+                                        <field name="loc_telecom_duree" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Quelle est la marque / le modèle de votre installation</strong>
+                                        <field name="loc_telecom_marque" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Quel est le montant de vos mensualités</strong>
+                                        <field name="loc_telecom_mensualite" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Quel est le nom de votre installateur</strong>
+                                        <field name="loc_telecom_installateur" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Combien de postes téléphoniques (fax inclus) avez-vous</strong>
+                                        <field name="nb_poste" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>                                                                                                                                                                                                                        
+                            <group col="4">
+                                <group coslpan="1">                              
+                                    <field name="nb_poste_analogique"/>
+                                </group>
+                                <group coslpan="1"> 
+                                    <field name="nb_poste_numerique"/>
+                                </group>
+                                <group coslpan="1"> 
+                                    <field name="nb_poste_ip"/>
+                                </group>
+                                <group coslpan="1"> 
+                                    <field name="nb_poste_fax"/>
+                                </group>
+                            </group>
+                            <h3 style="font-size: 16px; text-decoration: underline;">Objectifs</h3>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Remplacer votre installation téléphonique (standard + postes)</strong>
+                                        <field name="obj_remplacer_inst_tel" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Remplacer votre standard téléphonique en conservant vos postes</strong>
+                                        <field name="obj_remplacer_standard_tel" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group> 
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Mettre en place un contrat de maintenance pour votre installation actuelle</strong>
+                                        <field name="obj_ajouter_standard" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group> 
+                            <group col="1">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Faut-il prévoir le câblage de vos locaux</strong>
+                                        <field name="obj_cablage" style="width: auto;"/>
+                                    </div>
+                                </group>
+                            </group>                                                                                                               
+
+<!-- Téléphonie fixe et abonnements -->                            
+                                <FIELD/><separator string="Téléphonie fixe et abonnements"/><FIELD/>
+                                
+                            <group>
+                                <group>
+                                        <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                            <strong>Opérateur (Abonnements) :</strong>
+                                            <field name="operateur_nb_abonnement" style="width: auto;"/>
+                                        </div>
+                                </group>
+                                <group>
+                                        <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                            <strong>Opérateur (Consommations) :</strong>
+                                            <field name="operateur_cout_conso" style="width: auto;"/>
+                                        </div>                                   
+                                </group>
+                            </group>
+                            <h3 style="font-size: 16px;">Coût minute :</h3>
+                            <group coslpan="1"> 
+                                <field name="cout_minute_local"/>
+                                <field name="cout_minute_national"/>
+                                <field name="cout_minute_mobile"/>
+                                <field name="cout_minute_international"/>
+                            </group>
+                            <h3 style="font-size: 16px;">Forfait :</h3>
+                            <group col="3">    
+                                <group colspan="1">
+                                    <field name="is_forfait_local"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="duree_forfait_local"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="montant_forfait_local"/>
+                                </group> 
+                            </group>
+                            <group col="3">    
+                                <group colspan="1">
+                                    <field name="is_forfait_national"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="duree_forfait_national"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="montant_forfait_national"/>
+                                </group> 
+                            </group>
+                            <group col="3">    
+                                <group colspan="1">
+                                    <field name="is_forfait_mobile"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="duree_forfait_mobile"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="montant_forfait_mobile"/>
+                                </group> 
+                            </group>                                                   
+
+<!-- Téléphonie mobile -->
+                                <FIELD/><separator string="Téléphonie mobile"/><FIELD/>
+                            <group>
+                                <group>
+                                    <field name="is_telephonie_mobile"/>
+                                </group>
+                                <group>
+                                    <field name="is_flotte_mobile"/>
+                                </group>
+                            </group>
+                            <h3 style="font-size: 16px;">Opérateur actuel :</h3>
+                            <group col="4">
+                                <group colspan="1">
+                                    <field name="operateur_sfr"/>
+                                </group>
+
+                                <group colspan="1">
+                                    <field name="operateur_bouygues"/>
+                                </group>
+
+                                <group colspan="2">
+                                    <field name="operateur_coriolis"/>
+                                </group>                                                                                                                                                                                               
+                            </group>
+                            <group col="4">
+                                <group colspan="1">
+                                    <field name="operateur_orange"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="operateur_free"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="operateur_credit_mutuel"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="operateur_autre"/>
+                                </group>                                                                                                                       
+                            </group>
+
+                            <group>
+                                <field name="nb_lignes_mobiles"/>
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Echéance (date de fin de contrat) :</strong>
+                                    <field name="echeance_contrat_mobile" style="width: auto;"/>
+                                </div>                              
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Forfait DATA par ligne mobile en GO :</strong>
+                                    <field name="nb_go_data_par_ligne" style="width: auto;"/>
+                                </div>                                
+                            </group>                                                                                    
+                        </page>
+
+
+<!-- Onglet Internet -->
+<!-- ############### -->
+
+                        <page string="Internet">
+
+<!-- Internet -->                        
+                                <FIELD/><separator string="Internet"/><FIELD/>
+                                    <group col="3">
+                                        <group colspan="1">
+                                            <field name="is_internet"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="mono_site"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="multi_sites"/>
+                                        </group>                                                                                                                 
+                                    </group>
+                                    <group>
+                                        <field name="is_projet_internet"/>
+                                    </group>
+                                    <h3 style="font-size: 16px;">Type de liens :</h3>
+                                    <group col="5">
+                                        <group colspan="1">
+                                            <field name="lien_internet_adsl"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="lien_internet_vdsl"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_sdsl"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_ftto"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_ftth"/>
+                                        </group>                                                                                                                                                                 
+                                    </group>
+                                    <group col="5">
+                                        <group colspan="1">
+                                            <field name="lien_internet_fttb"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="lien_internet_ls"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_numeris"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_rtc"/>
+                                        </group> 
+                                        <group colspan="1">
+                                            <field name="lien_internet_blr"/>
+                                        </group>                                                                                                                                                                 
+                                    </group>
+                                    <group>
+                                        <field name="fournisseur_internet"/>
+                                    </group> 
+                                    <group col="2">
+                                        <group colspan="1">
+                                            <field name="is_backup_liens_internet"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="type_liens_internet"/>
+                                        </group>                                                                             
+                                    </group>
+                                    <group>
+                                        <field name="is_wifi"/>
+                                    </group>
+                                    <group col="2">
+                                        <group colspan="1">
+                                            <field name="wifi_ouvert_avec_securite"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="wifi_ouvert_sans_securite"/>
+                                        </group>                                                                             
+                                    </group>
+
+<!-- VPN -->
+                                <FIELD/><separator string="VPN"/><FIELD/>
+
+                        <group col="3">
+                            <group colspan="1">
+                                <field name="is_vpn"/>
+                            </group>
+                            <group colspan="1">
+                                <field name="is_interet_vpn"/>
+                            </group>
+                            <group colspan="1">
+                                <field name="fournisseur_vpn"/>
+                            </group>                                                                        
+                        </group>
+                        <h3 style="font-size: 16px;">Type de solution :</h3>
+                        <group col="3">
+                            <group colspan="1">
+                                <field name="solution_vpn_mpls"/>
+                            </group>
+                            <group colspan="1">
+                                <field name="solution_vpn_ipsec"/>
+                            </group>
+                            <group colspan="1">
+                                <field name="solution_vpn_ssl"/>
+                            </group>                                                                        
+                        </group>
+                        <h3 style="font-size: 16px;">Type de liens :</h3>
+                            <group col="5">
+                                <group colspan="1">
+                                    <field name="lien_vpn_adsl"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="lien_vpn_vdsl"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_sdsl"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_ftto"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_ftth"/>
+                                </group>                                                                                                                                                                 
+                            </group>
+                            <group col="5">
+                                <group colspan="1">
+                                    <field name="lien_vpn_fttb"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="lien_vpn_ls"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_numeris"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_rtc"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="lien_vpn_blr"/>
+                                </group>                                                                                                                                                                 
+                            </group>
+                            <group>
+                                <field name="is_backup_liens_vpn"/>
+                            </group>
+                            <group>
+                                <field name="nb_liens_vpn"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="qos"/>
+                                </group>
+                                <group>
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Combien de classes de services :</strong>
+                                        <field name="nb_classes_services" style="width: auto;"/>
+                                    </div>                                
+                                </group>                                                                         
+                            </group>
+                            <group>
+                                <field name="gestion_firewall"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Sortie Internet en coeur de réseau :</strong>
+                                        <field name="sortie_internet_coeur_reseau" style="width: auto;"/>
+                                    </div>                                
+                                </group>                                         
+                                <group>
+                                    <field name="debit_vpn"/>
+                                </group>       
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Collecte IP sec depuis des postes nomades</strong>
+                                    <field name="collecte_ip_sec_postes_nomades" style="width: auto;"/>
+                                </div>
+                            </group>                                                                                                                                                                                        
+
+<!-- Messagerie collaborative -->
+                                <FIELD/><separator string="Messagerie collaborative"/><FIELD/>
+
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Messagerie collaborative</strong>
+                                        <field name="is_messagerie_collab" style="width: auto;"/>
+                                    </div>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_msg_collab"/>
+                                </group>                                                                     
+                            </group>
+                            <h3 style="font-size: 16px;">Type :</h3>
+                            <group col="4">
+                                <group colspan="1">
+                                    <field name="type_msg_mx"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_zimbra"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_lotus"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_autre"/>
+                                </group>                                                                                                
+                            </group>
+                            <h3 style="font-size: 16px;">Mode :</h3>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="mode_msg_interne"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mode_msg_saas"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="msg_saas_budget"/>
+                                </group>                                                                                              
+                            </group>
+                            <group>
+                                <field name="nb_bal"/>
+                            </group>
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="fournisseur_msg_collab"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="msg_collab_ssii"/>
+                                </group>                                                                                           
+                            </group>
+                            <group>
+                                <field name="msg_collab_partage"/>
+                            </group> 
+                            <h3 style="font-size: 16px;">Type :</h3>
+                            <group col="5">
+                                <group colspan="1">
+                                    <field name="type_msg_utilisation_mail"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_utilisation_contact"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_utilisation_agenda"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_utilisation_document"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="type_msg_utilisation_autre"/>
+                                </group>                                                                                                                           
+                            </group>                                                                              
+
+<!-- Site web -->
+                                <FIELD/><separator string="Site web"/><FIELD/>
+
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="is_site_web"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_site_web"/>
+                                </group>                                                                     
+                            </group>
+                            <h3 style="font-size: 16px;">Mode :</h3>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="mode_site_web_interne"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mode_site_web_agence"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="site_web_nom_agence"/>
+                                </group>                                                                                                   
+                            </group>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="is_intranet"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_intranet"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mep_intranet_date"/>
+                                </group>                                                                                                   
+                            </group>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="is_extranet"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_extranet"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mep_extranet_date"/>
+                                </group>                                                                                                   
+                            </group>                                                                             
+                        </page>
+
+
+<!-- Onglet Infra -->
+<!-- ############### -->
+
+                        <page string="Infra">
+
+<!-- Sauvegarde -->                        
+                                <FIELD/><separator string="Sauvegarde"/><FIELD/>
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="is_sauvegarde"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_sauvegarde"/>
+                                </group>                                                                     
+                            </group>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="is_sauvegarde_pra"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_sauvegarde_pra"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mep_sauvegarde_pra_date"/>
+                                </group>                                                                                                   
+                            </group>
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="is_sauvegarde_pca"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_sauvegarde_pca"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="mep_sauvegarde_pca_date"/>
+                                </group>                                                                                                   
+                            </group>
+                            <group>
+                                <field name="sauvegarde_budget_annuel"/>
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Solution de sauvegarde en place :</strong>
+                                    <field name="sauvegarde_solution_actuelle" style="width: auto;"/>
+                                </div>
+                            </group>                                                                                              
+
+<!-- Parc informatique -->
+                                <FIELD/><separator string="Parc informatique"/><FIELD/>
+                            <group>
+                                <field name="parc_informatique_fournisseurs"/>
+                            </group>
+                            <group>
+                                <field name="parc_informatique_marques"/>
+                            </group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Etes-vous propriétaire</strong>
+                                    <field name="is_parc_inf_prop" style="width: auto;"/>
+                                </div>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Etes-vous locataire</strong>
+                                    <field name="is_parc_inf_loc" style="width: auto;"/>
+                                </div>
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Si locataire, depuis quand</strong>
+                                    <field name="loc_parc_inf_depuis" style="width: auto;"/>
+                                </div>
+                            </group>  
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Quelle est la durée de votre contrat de location</strong>
+                                    <field name="loc_parc_inf_duree" style="width: auto;"/>
+                                </div>
+                            </group>  
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Quel est le montant de vos mensualités</strong>
+                                    <field name="loc_parc_inf_mensualite" style="width: auto;"/>
+                                </div>
+                            </group>   
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Quel est le nom de votre SSII</strong>
+                                    <field name="loc_parc_inf_ssii" style="width: auto;"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="is_virtualisation"/>
+                            </group>
+                            <group>
+                                <field name="is_anti_virus"/>
+                            </group>
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Intéressé par une mise en place de :</strong>
+                                    <field name="is_interet_mep_parc_info" style="width: auto;"/>
+                                </div>
+                            </group>
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>TYPE</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">                                   
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Qté</strong>
+                                    </div>    
+                                </group>                                                                                                                                                                                                                                                             
+                            </group>  
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Desktop PC</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_desktop_pc" nolabel="1"/>
+                                </group>                                                             
+                            </group>
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Desktop MAC</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_desktop_mac" nolabel="1"/>
+                                </group>                                                             
+                            </group> 
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Portable PC</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_portable_pc" nolabel="1"/>
+                                </group>                                                             
+                            </group> 
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Portable MAC</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_portable_mac" nolabel="1"/>
+                                </group>                                                             
+                            </group> 
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Tablette</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_tablette" nolabel="1"/>
+                                </group>                                                             
+                            </group> 
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Serveur</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_serveur" nolabel="1"/>
+                                </group>                                                             
+                            </group>       
+                            <group col="2">
+                                <group colspan="1">
+                                    <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                        <strong>Clients légers</strong>
+                                    </div>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="mep_clients_legers" nolabel="1"/>
+                                </group>                                                             
+                            </group>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                        </page>
+
+
+
+<!-- Onglet Vidéo -->
+<!-- ############### -->
+
+                        <page string="Vidéo">
+
+<!-- Vidéo surveillance -->                        
+                                <FIELD/><separator string="Vidéo surveillance"/><FIELD/>    
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="is_video_surveillance"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_video_surveillance"/>
+                                </group>                                                                     
+                            </group>
+                            <group>
+                                <field name="fournisseur_video_surveillance"/>
+                            </group>
+                            <group>
+                                <field name="nb_sites_video_surveillance"/>
+                            </group>     
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="video_surveillance_ip"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="video_surveillance_autre"/>
+                                </group>                                                                     
+                            </group>    
+                            <group>
+                                <field name="video_surveillance_type_camera"/>
+                            </group>
+                            <group>
+                                <field name="video_surveillance_nb_camera"/>
+                            </group> 
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="video_surveillance_evolution"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="video_surveillance_evolution_volume"/>
+                                </group> 
+                                <group colspan="1">
+                                    <field name="video_surveillance_evolution_date"/>
+                                </group>                                                                                                      
+                            </group>                                                                                                                                                               
+
+<!-- Visio conférence -->
+                                <FIELD/><separator string="Visio conférence"/><FIELD/>
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="is_visio_conference"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_visio_conference"/>
+                                </group>                                                                     
+                            </group>
+                            <group>
+                                <field name="fournisseur_visio_conference"/>
+                            </group>
+                            <group>
+                                <field name="nb_sites_visio_conference"/>
+                            </group>    
+                            <group>
+                                <field name="visio_conference_ip"/>                             
+                            </group>  
+                            <group>
+                                <field name="visio_conference_numeris"/>                             
+                            </group>    
+                            <h3 style="font-size: 16px; ">Ecrans :</h3>                            
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="visio_conference_ecrans_plasma"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="visio_conference_ecrans_lcd"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="visio_conference_ecrans_video_proj"/>
+                                </group>                                                                                                   
+                            </group>     
+                            <group>
+                                <div style="display: flex; align-items: baseline; gap: 10px; white-space: nowrap;">
+                                    <strong>Partage de documents</strong>
+                                    <field name="visio_conference_partage_documents" style="width: auto;"/>
+                                </div>
+                            </group>                            
+
+<!-- Affichage dynamique -->                                                                        
+                                <FIELD/><separator string="Affichage dynamique"/><FIELD/>         
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="is_affichage_dynamique"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="is_interet_affichage_dynamique"/>
+                                </group>                                                                     
+                            </group>
+                            <group>
+                                <field name="fournisseur_affichage_dynamique"/>
+                            </group>
+                            <group>
+                                <field name="nb_sites_affichage_dynamique"/>
+                            </group>    
+                            <group col="2">
+                                <group colspan="1">
+                                    <field name="affichage_dynamique_ip"/>                             
+                                </group>  
+                                <group colspan="1">
+                                    <field name="affichage_dynamique_autre"/>                             
+                                </group>
+                            </group>  
+                            <h3 style="font-size: 16px; ">Ecrans :</h3>                            
+                            <group col="3">
+                                <group colspan="1">
+                                    <field name="affichage_dynamique_ecrans_plasma"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="affichage_dynamique_ecrans_lcd"/>
+                                </group>
+                                <group colspan="1">
+                                    <field name="affichage_dynamique_ecrans_video"/>
+                                </group>                                                                                                   
+                            </group> 
+                        </page>
+
+
+<!-- Onglet Notes -->
+<!-- ############### -->
+
+                        <page string="Notes">
+                                <FIELD/><separator string="Actions / Schémas / Notes"/><FIELD/> 
+                            <group>
+                                <field name="notes_complementaires" nolabel="1"/>
+                            </group>                                               
+
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+
+<!-- Menu du module -->
+<!-- ############### -->
+    <record id="view_audit_list" model="ir.ui.view">
+        <field name="name">audit.list</field>
+        <field name="model">audit_it.audit</field>
+        <field name="arch" type="xml">
+            <list string="Mon Modèle">
+                <field name="raison_sociale" string="Entreprise"/>           
+            </list>
+        </field>
+    </record>
+
+    <record id="action_audit" model="ir.actions.act_window">
+        <field name="name">Liste des audits</field>
+        <field name="res_model">audit_it.audit</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oc_view_nocontent_create">
+                Cliquez pour ajouter un nouvel élément dans Audit it
+            </p>
+        </field>
+
+    </record>
+
+    <menuitem id="menu_audit" 
+              name="Audit IT" 
+              sequence="10"/>
+
+    <menuitem id="menu_audit_main"
+              name="Liste des audits"
+              parent="menu_audit"
+              action="action_audit"
+              sequence="20"/>
+
+
+
+</odoo>

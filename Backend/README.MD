@@ -1,0 +1,1 @@
+Cette branche est laissé en l'état, le code actuel permet de connecter l'api à odoo, (visible à l'adresse http://localhost:1337/api/test-odoo) mais le système de création d'utilisateur (pour odoo uniquement) ne fonctionne pas.

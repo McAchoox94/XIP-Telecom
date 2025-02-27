@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+<template id="report_audit_template">
+    <t t-foreach="docs" t-as="property">
+
+
+        <t t-call="web.html_container">
+        <t t-set="company_footer" t-value="''" />
+
+            <!-- Page de garde -->   
+            <!--############################-->     
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <br/>
+                    <br/>                                    
+                    <h1 class="text-center">Audit &amp; Qualification</h1>
+                    <br/>
+                    <h2 class="text-center"><t t-esc="property.raison_sociale"/></h2>
+                    <br/>                                        
+                    <h2 class="text-center">Dossier de qualification client,<br/>
+                                            pour l’ensemble de son projet IT</h2>                    
+                    <!--
+                    <footer>
+                        <t t-esc="company_footer"/>
+                    </footer>
+
+                    -->
+                </div>        
+            </t>
+
+            <!-- Partie "Identité"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+
+                <div style="page-break-inside: avoid;">
+
+                    <h1 class="text-center">Identité</h1>
+                    <br/>                    
+
+                    <p><strong>Type de contact : </strong>
+                        <t t-if="property.contact_prospection_physique"><span>Prospection physique</span></t>
+                        <t t-if="property.contact_phoning"><span>Phoning</span></t>
+                        <t t-if="property.contact_rdv_perso"><span>RDV personnel</span></t>
+                        <t t-if="property.contact_rdv_callcenter"><span>RDV call center</span></t>
+                        <t t-if="property.contact_autre"><span><t t-esc="property.contact_autre"/></span></t>                                                                        
+                    </p>
+
+                    <br/>
+                    <h2>Identité</h2>
+                    <p><strong>Raison sociale : </strong> <t t-esc="property.raison_sociale"/></p>
+                    <p><strong>Adresse :</strong><br/>
+                    <t t-esc="property.adresse"/><br/>                   
+                    <t t-esc="property.cp"/><br/>
+                    <t t-esc="property.ville"/></p>                      
+                    <p><strong>Téléphone :</strong> <t t-esc="property.telephone"/></p>  
+                    <p><strong>Télécopie :</strong> <t t-esc="property.telecopie"/></p>
+                    <p><strong>Adresse email :</strong> <t t-esc="property.email"/></p>                                                                                                                                                                                
+                    <p><strong>Site internet :</strong> <t t-esc="property.site_web"/></p>
+                    <p><strong>Effectif : </strong>
+                        <t t-if="property.eff_1_9"><span>1 à 9</span></t>
+                        <t t-if="property.eff_10_24"><span>10 à 24</span></t>
+                        <t t-if="property.eff_25_49"><span>25 à 49</span></t>
+                        <t t-if="property.eff_50_99"><span>50 à 99</span></t>
+                        <t t-if="property.eff_100_500"><span>100 à 500</span></t>                                                                        
+                    </p>
+
+                    </div>
+
+
+                    <div style="page-break-inside: avoid;">
+                    <br/>                    
+                    <h3>Votre contact :</h3>
+                    <p><t t-esc="property.nom_contact"/></p>
+                    <p><strong>Fonction : </strong><t t-esc="property.fonction"/></p>
+                    <p><t t-esc="property.telephone_contact"/></p>                    
+                    <p><t t-esc="property.email_contact"/></p>
+                    </div>
+                </div> 
+            </t>
+
+            <!-- Partie "Téléphone"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 class="text-center">Téléphone</h1>
+                    <br/>                    
+
+            <!-- Sous-partie "Infrastructure telecom"-->
+
+                    <div style="page-break-inside: avoid;">    
+
+                    <h2>Infrastructure telecom</h2>
+
+                    <t t-if="property.is_install_telephonique">
+                        <p>Vous avez une installation téléphonique de type 
+                            <t t-if="property.inst_tel_pabx"><span>PABX</span></t>
+                            <t t-if="property.inst_tel_ipbx"><span>IPBX</span></t>
+                            <t t-if="property.inst_tel_centrex"><span>CENTREX</span></t>
+                        </p>
+                    </t>
+                    
+                    <t t-else=""><p>Vous n'avez pas d'installation téléphonique</p></t>
+
+                    <t t-if="property.is_telecom_prop"><p>Vous êtes propriétaire de votre installation</p></t>
+                    
+                    <t t-else=""><p>Vous n'êtes pas propriétaire de votre installation</p></t>   
+
+                    <t t-if="property.is_telecom_loc">
+                        <p>Vous êtes locataire de votre installation depuis le <t t-esc="property.loc_telecom_depuis"/></p>
+                        <p>Votre contrat de location a une durée de <t t-esc="property.loc_telecom_duree"/></p> 
+                        <p>Vos mensualités : <t t-esc="property.loc_telecom_mensualite"/></p>                                                    
+                    </t>            
+
+                    <p>Marque / modèle de votre installation : <t t-esc="property.loc_telecom_marque"/></p>
+    
+                    <p>Votre installateur est <t t-esc="property.loc_telecom_installateur"/></p> 
+
+                    <p>Vous avez <t t-esc="property.nb_poste"/> postes au total, dont :</p>
+
+                    <ul>
+                        <li>
+                            <t t-if="property.nb_poste_analogique"><t t-esc="property.nb_poste_analogique"/></t>
+                            <t t-else="">0</t>   
+                        postes analogiques  
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.nb_poste_numerique"><t t-esc="property.nb_poste_numerique"/></t>
+                            <t t-else="">0</t>   
+                        postes numériques  
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.nb_poste_ip"><t t-esc="property.nb_poste_ip"/></t>
+                            <t t-else="">0</t>   
+                        postes IP  
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.nb_poste_fax"><t t-esc="property.nb_poste_fax"/></t>
+                            <t t-else="">0</t>   
+                        postes FAX  
+                        </li>                                                              
+                    </ul>
+
+                    <h3>Vos objectifs :</h3>
+
+                    <ul>
+                        <t t-if="property.obj_remplacer_inst_tel"><li><span>Remplacer votre installation téléphonique (standard + postes)</span></li></t>
+                        <t t-if="property.obj_remplacer_standard_tel"><li><span>Remplacer votre standard téléphonique en conservant vos postes</span></li></t>
+                        <t t-if="property.obj_ajouter_standard"><li><span>Mettre en place un contrat de maintenance pour votre installation actuelle</span></li></t>
+                        <t t-if="property.obj_cablage"><li><span>Prévoir le câblage de vos locaux</span></li></t>                                                                        
+                    </ul>
+
+
+                    </div>
+                                                                             
+                                                          
+            <!-- Sous-partie "Téléphonie fixe et abonnements"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Téléphonie fixe et abonnements</h2>
+
+                    <p>Opérateur (Abonnements) : <t t-esc="property.operateur_nb_abonnement"/></p>    
+                    <p>Opérateur (Consommations) : <t t-esc="property.operateur_cout_conso"/></p>   
+
+                    <h3>Vos coûts / minute :</h3>
+
+                    <ul>
+                        <li>
+                            <t t-if="property.cout_minute_local"><t t-esc="property.cout_minute_local"/></t>
+                            <t t-else="">0</t>   
+                        en local  
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.cout_minute_national"><t t-esc="property.cout_minute_national"/></t>
+                            <t t-else="">0</t>   
+                        en national  
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.cout_minute_mobile"><t t-esc="property.cout_minute_mobile"/></t>
+                            <t t-else="">0</t>   
+                        en mobile 
+                        </li>  
+    
+                        <li>
+                            <t t-if="property.cout_minute_international"><t t-esc="property.cout_minute_international"/></t>
+                            <t t-else="">0</t>   
+                        à l'international  
+                        </li>                                                              
+                    </ul>       
+
+                    <h3>Vos forfaits :</h3>
+
+                    <ul>
+                        <t t-if="property.is_forfait_local">
+                            <li>Local, d'une durée de <t t-esc="property.duree_forfait_local"/> et d'un montant de <t t-esc="property.montant_forfait_local"/></li>  
+                        </t>
+                        <t t-if="property.is_forfait_national">
+                            <li>National, d'une durée de <t t-esc="property.duree_forfait_national"/> et d'un montant de <t t-esc="property.montant_forfait_national"/></li>  
+                        </t>   
+                        <t t-if="property.is_forfait_mobile">
+                            <li>
+                            Mobile, d'une durée de <t t-esc="property.duree_forfait_mobile"/> et d'un montant de <t t-esc="property.montant_forfait_mobile"/></li>  
+                        </t>                                                                                                        
+                    </ul>            
+
+                    </div>                        
+
+
+            <!-- Sous-partie "Téléphonie mobile" -->    
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Téléphonie mobile</h2>   
+
+                    <t t-if="property.is_telephonie_mobile"><p>Vous avez de la téléphonie mobile</p></t>
+                    <t t-else=""><p>Vous n'avez pas de téléphonie mobile</p></t>
+                    <t t-if="property.is_flotte_mobile"><p>Vous avez une flotte mobile</p></t>
+                    <t t-else=""><p>Vous n'avez pas de flotte mobile</p></t>                    
+
+                    
+                    <p>Votre opérateur actuel est
+                        <t t-if="property.operateur_sfr"><span>SFR</span></t>
+                        <t t-if="property.operateur_orange"><span>ORANGE</span></t>
+                        <t t-if="property.operateur_bouygues"><span>BOUYGUES</span></t>
+                        <t t-if="property.operateur_free"><span>FREE</span></t>
+                        <t t-if="property.operateur_coriolis"><span>CORIOLIS</span></t>
+                        <t t-if="property.operateur_credit_mutuel"><span>CREDIT MUTUEL</span></t>                                                
+                        <t t-if="property.operateur_autre"><span><t t-esc="property.operateur_autre"/></span></t>
+                        , avec <t t-esc="property.nb_lignes_mobiles"/> lignes mobiles
+                        , et <t t-esc="property.nb_go_data_par_ligne"/> GO de data par ligne                                                                                   
+                    </p>
+
+                    <p>Votre contrat se terminera le <t t-esc="property.echeance_contrat_mobile"/></p> 
+
+                    </div>                
+                </div> 
+            </t>
+
+
+            <!-- Partie "Internet"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 class="text-center">Internet</h1>
+
+            <!-- Sous-partie "Internet"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <h2>Internet</h2>
+
+                    <t t-if="property.is_internet"><p>Internet : oui</p></t>
+                    <t t-if="property.mono_site"><p>Mono site : oui</p></t>
+                    <t t-if="property.multi_sites"><p>Multi sites : oui</p></t>
+                    <t t-if="property.is_projet_internet"><p>Projet : oui</p></t>          
+
+                    <p>Votre lien est de type
+                        <t t-if="property.lien_internet_adsl"><span>ADSL</span></t>
+                        <t t-if="property.lien_internet_vdsl"><span>VDSL</span></t>
+                        <t t-if="property.lien_internet_sdsl"><span>SDSL</span></t>
+                        <t t-if="property.lien_internet_ftto"><span>FTTO</span></t>
+                        <t t-if="property.lien_internet_ftth"><span>FTTH</span></t>
+                        <t t-if="property.lien_internet_fttb"><span>FTTB</span></t>        
+                        <t t-if="property.lien_internet_ls"><span>LS</span></t> 
+                        <t t-if="property.lien_internet_numeris"><span>NUMERIS</span></t> 
+                        <t t-if="property.lien_internet_rtc"><span>RTC</span></t> 
+                        <t t-if="property.lien_internet_blr"><span>BLR</span></t>                                                                                
+                    </p> 
+
+                    <p>Votre fournisseur est <t t-esc="property.fournisseur_internet"/></p>
+
+                    <t t-if="property.is_backup_liens_internet">
+                        <p>Vous avez un backup pour vos liens de type <t t-esc="property.type_liens_internet"/></p>                         
+                    </t>            
+
+                    <t t-if="property.is_wifi">
+                        <p>Vous avez un wifi 
+                        <t t-if="property.wifi_ouvert_avec_securite"> ouvert avec sécurité</t> 
+                        <t t-if="property.wifi_ouvert_sans_securite"> ouvert sans sécurité</t>                        
+                        </p>                         
+                    </t>                  
+
+                    </div>    
+                                                                             
+                                                          
+            <!-- Sous-partie "VPN"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>VPN</h2>
+
+                    <p>
+                        <t t-if="property.is_vpn">Vous avez un VPN</t><t t-else="">Vous n'avez pas de VPN</t>
+                    et   
+                        <t t-if="property.is_interet_vpn">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>               
+
+                    <p>Votre fournisseur est <t t-esc="property.fournisseur_vpn"/></p>                     
+                                     
+                    <p>Votre type de solution est
+                        <t t-if="property.solution_vpn_mpls"><span>MPLS</span></t>
+                        <t t-if="property.solution_vpn_ipsec"><span>IP sec</span></t>
+                        <t t-if="property.solution_vpn_ssl"><span>SSL</span></t>                                                                             
+                    </p> 
+
+                    <p>Votre type de lien est
+                        <t t-if="property.lien_vpn_adsl"><span>ADSL</span></t>
+                        <t t-if="property.lien_vpn_vdsl"><span>VDSL</span></t>
+                        <t t-if="property.lien_vpn_sdsl"><span>SDSL</span></t>
+                        <t t-if="property.lien_vpn_ftto"><span>FTTO</span></t>
+                        <t t-if="property.lien_vpn_ftth"><span>FTTH</span></t>
+                        <t t-if="property.lien_vpn_fttb"><span>FTTB</span></t>        
+                        <t t-if="property.lien_vpn_ls"><span>LS</span></t> 
+                        <t t-if="property.lien_vpn_numeris"><span>NUMERIS</span></t> 
+                        <t t-if="property.lien_vpn_rtc"><span>RTC</span></t> 
+                        <t t-if="property.lien_vpn_blr"><span>BLR</span></t>                                                                            
+                    </p>    
+
+                    <t t-if="property.is_backup_liens_vpn">
+                        <p>Vous avez un backup pour <t t-esc="property.nb_liens_vpn"/> liens</p>                         
+                    </t>    
+
+                    <p>Votre Qos : <t t-esc="property.qos"/></p>      
+                    <p>Votre nombre de classes de services : <t t-esc="property.nb_classes_services"/></p>                
+                    <p>Gestion du firewall : <t t-esc="property.gestion_firewall"/></p>    
+                    <p>Sortie Internet en coeur de réseau : <t t-esc="property.sortie_internet_coeur_reseau"/></p> 
+                    <p>Débit : <t t-esc="property.debit_vpn"/></p>    
+
+                    <t t-if="property.collecte_ip_sec_postes_nomades">
+                        <p>Collecte IP sec depuis des postes nomades : oui</p>                         
+                    </t>       
+
+                    </div>                    
+                                                                                                       
+
+
+            <!-- Sous-partie "Messagerie collaborative" -->             
+
+                    <div style="page-break-inside: avoid;">       
+
+                    <br/>
+                    <h2>Messagerie collaborative</h2>   
+
+                    <p>
+                        <t t-if="property.is_messagerie_collab">Vous avez une messagerie collaborative</t><t t-else="">Vous n'avez pas de messagerie collaborative</t>
+                    et   
+                        <t t-if="property.is_interet_msg_collab">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>     
+
+                    <p>Votre messagerie est de type
+                        <t t-if="property.type_msg_mx"><span>MX</span></t>
+                        <t t-if="property.type_msg_zimbra"><span>ZIMBRA</span></t>
+                        <t t-if="property.type_msg_lotus"><span>LOTUS</span></t>                                           
+                        <t t-if="property.type_msg_autre"><span><t t-esc="property.type_msg_autre"/></span></t>
+                        , en mode 
+                        <t t-if="property.mode_msg_interne"><span>Interne</span></t>
+                        <t t-if="property.mode_msg_saas"><span>SAAS</span></t>
+                        , et votre budget annuel est de <t t-esc="property.msg_saas_budget"/>                                                                             
+                    </p>                                         
+
+                    <p>Vous avez <t t-esc="property.nb_bal"/> BAL</p>
+                    <p>Votre fournisseur : <t t-esc="property.fournisseur_msg_collab"/></p>
+                    <p>Votre SSII : <t t-esc="property.msg_collab_ssii"/></p> 
+
+                    <t t-if="property.msg_collab_partage">
+                        <p>Vous partagez votre messagerie entre : </p>   
+                        <ul>
+                            <t t-if="property.type_msg_utilisation_mail"><li>les mails</li></t>
+                            <t t-if="property.type_msg_utilisation_contact"><li>les contacts</li></t>
+                            <t t-if="property.type_msg_utilisation_agenda"><li>l'agenda</li></t>    
+                            <t t-if="property.type_msg_utilisation_document"><li>les documents</li></t>                                                                 
+                            <t t-if="property.type_msg_utilisation_autre"><li><t t-esc="property.type_msg_utilisation_autre"/></li></t>    
+                        </ul>                                                          
+                    </t>           
+
+                    </div>                                                    
+
+
+            <!-- Sous-partie "Site web"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Site web</h2>
+
+                    <p>
+                        <t t-if="property.is_site_web">Vous avez un site web</t><t t-else="">Vous n'avez pas de site web</t>
+                    et   
+                        <t t-if="property.is_interet_site_web">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>   
+
+                    <t t-if="property.is_site_web">
+                        <p>Vous site web est géré  
+                            <t t-if="property.mode_site_web_interne">en interne</t>
+                            <t t-if="property.mode_site_web_agence">par l'agence <t t-esc="property.site_web_nom_agence"/></t>
+                        </p>                                                           
+                    </t>  
+
+                    <p>
+                        <t t-if="property.is_intranet">Vous avez un intranet</t><t t-else="">Vous n'avez pas d'intranet</t>
+                    et   
+                        <t t-if="property.is_interet_intranet">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une mise en place <t t-if="property.is_interet_intranet">autour de <t t-esc="property.mep_intranet_date"/></t>
+                    </p>    
+
+                    <p>
+                        <t t-if="property.is_extranet">Vous avez un extranet</t><t t-else="">Vous n'avez pas d'extranet</t>
+                    et   
+                        <t t-if="property.is_interet_extranet">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une mise en place <t t-if="property.is_interet_extranet">autour de <t t-esc="property.mep_extranet_date"/></t>
+                    </p>     
+
+                    </div>
+
+                </div> 
+            </t>            
+      
+
+
+            <!-- Partie "Infra"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 class="text-center">Infra</h1>
+
+            <!-- Sous-partie "Sauvegarde"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <h2>Sauvegarde</h2>
+
+                    <p>
+                        <t t-if="property.is_sauvegarde">Vous avez une solution de sauvegarde</t><t t-else="">Vous n'avez pas de solution de sauvegarde</t>
+                    et   
+                        <t t-if="property.is_interet_sauvegarde">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>
+
+                    <p>
+                        <t t-if="property.is_sauvegarde_pra">Vous avez une sauvegarde PRA</t><t t-else="">Vous n'avez pas de sauvegarde PRA</t>
+                    et   
+                        <t t-if="property.is_interet_sauvegarde_pra">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une mise en place <t t-if="property.is_interet_sauvegarde_pra">autour de <t t-esc="property.mep_sauvegarde_pra_date"/></t>
+                    </p> 
+
+                    <p>
+                        <t t-if="property.is_sauvegarde_pca">Vous avez une sauvegarde PCA</t><t t-else="">Vous n'avez pas de sauvegarde PCA</t>
+                    et   
+                        <t t-if="property.is_interet_sauvegarde_pca">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une mise en place <t t-if="property.is_interet_sauvegarde_pca">autour de <t t-esc="property.mep_sauvegarde_pca_date"/></t>
+                    </p>        
+
+                    <p>Votre budget annuel est de <t t-esc="property.sauvegarde_budget_annuel"/></p>
+                    <p>Votre solution de sauvegarde actuelle est : <t t-esc="property.sauvegarde_solution_actuelle"/></p>  
+
+                    </div>                                                                       
+
+                                                     
+                                                          
+            <!-- Sous-partie "Parc informatique"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Parc informatique</h2>
+
+                    <p>Fournisseurs : <t t-esc="property.parc_informatique_fournisseurs"/></p>
+                    <p>Marques : <t t-esc="property.parc_informatique_marques"/></p>                                                                                              
+
+                    <t t-if="property.is_parc_inf_prop"><p>Vous êtes propriétaire de votre parc informatique</p></t>
+                    
+                    <t t-else=""><p>Vous n'êtes pas propriétaire de votre parc informatique</p></t>   
+
+                    <t t-if="property.is_parc_inf_loc">
+                        <p>Vous êtes locataire de votre parc informatique depuis le <t t-esc="property.loc_parc_inf_depuis"/></p>
+                        <p>Votre contrat de location a une durée de <t t-esc="property.loc_parc_inf_duree"/></p> 
+                        <p>Vos mensualités : <t t-esc="property.loc_parc_inf_mensualite"/></p>                                                    
+                    </t>            
+
+
+
+                    <p>Votre SSII est <t t-esc="property.parc_informatique_marques"/></p> 
+
+                    <t t-if="property.is_virtualisation"><p>Virtualisation : oui</p></t>
+                    <t t-if="property.is_anti_virus"><p>Anti-virus : oui</p></t> 
+
+                    <t t-if="property.is_interet_mep_parc_info">
+                        <p>Vous êtes intéressé par une mise en place de :</p>
+                        <ul>
+                            <t t-if="property.mep_desktop_pc">
+                                <li>
+                                    <t t-esc="property.mep_desktop_pc"/> PC Desktop
+                                </li>
+                            </t>    
+                            <t t-if="property.mep_desktop_mac">
+                                <li>
+                                    <t t-esc="property.mep_desktop_mac"/> MAC Desktop
+                                </li>
+                            </t>                                   
+                            <t t-if="property.mep_portable_pc">
+                                <li>
+                                    <t t-esc="property.mep_portable_pc"/> PC portables
+                                </li>
+                            </t>                                   
+                            <t t-if="property.mep_portable_mac">
+                                <li>
+                                    <t t-esc="property.mep_portable_mac"/> MAC portables
+                                </li>
+                            </t>                                   
+                            <t t-if="property.mep_tablette">
+                                <li>
+                                    <t t-esc="property.mep_tablette"/> tablettes
+                                </li>
+                            </t>                                   
+                            <t t-if="property.mep_serveur">
+                                <li>
+                                    <t t-esc="property.mep_serveur"/> serveurs
+                                </li>
+                            </t>                                   
+                            <t t-if="property.mep_clients_legers">
+                                <li>
+                                    <t t-esc="property.mep_clients_legers"/> clients légers
+                                </li>      
+                            </t>                                                                                                                                                                                                                             
+                        </ul>
+                    </t>  
+
+                    </div>
+
+                </div> 
+            </t>            
+
+
+            <!-- Partie "Vidéo"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 class="text-center">Vidéo</h1>
+
+            <!-- Sous-partie "Vidéo surveillance"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <h2>Vidéo surveillance</h2>
+
+                    <p>
+                        <t t-if="property.is_video_surveillance">Vous avez une vidéo surveillance</t><t t-else="">Vous n'avez pas de vidéo surveillance</t>
+                    et   
+                        <t t-if="property.is_interet_video_surveillance">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>  
+
+                    <p>Votre fournisseur est <t t-esc="property.fournisseur_video_surveillance"/></p>
+                    <p>Vous avez <t t-esc="property.nb_sites_video_surveillance"/> sites</p>    
+
+                    <p>Type de vidéo surveillance :
+                        <t t-if="property.video_surveillance_ip">IP</t>
+                        <t t-if="property.video_surveillance_autre"><t t-esc="property.video_surveillance_autre"/></t>                        
+                    </p>         
+
+                    <p>Type de caméras : <t t-esc="property.video_surveillance_type_camera"/></p>      
+                    <p>Nombre de caméras : <t t-esc="property.video_surveillance_nb_camera"/></p>   
+
+                    <t t-if="property.video_surveillance_evolution">
+                        <p>Evolution à prévoir : oui, 
+                            pour un volume de <t t-esc="property.video_surveillance_evolution_volume"/> 
+                            autour de <t t-esc="property.video_surveillance_evolution_date"/>
+                        </p>
+                    </t>          
+
+                    </div>                                                                                                                                                          
+
+                                                     
+                                                          
+            <!-- Sous-partie "Visio conférence"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Visio conférence</h2>
+
+
+                    <p>
+                        <t t-if="property.is_visio_conference">Vous avez une solution de visio conférence</t><t t-else="">Vous n'avez pas de solution de visio conférence</t>
+                    et   
+                        <t t-if="property.is_interet_visio_conference">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>  
+
+                    <p>Votre fournisseur est <t t-esc="property.fournisseur_visio_conference"/></p>
+                    <p>Vous avez <t t-esc="property.nb_sites_visio_conference"/> sites</p>    
+
+                    <p>Type de visio conférence :
+                        <t t-if="property.visio_conference_ip">IP</t>
+                        <t t-if="property.visio_conference_numeris">Numéris</t>                 
+                    </p>    
+
+                    <p>Type d'écrans :</p>
+                        <ul>
+                            <t t-if="property.visio_conference_ecrans_plasma">
+                                <li>Plasma</li>
+                            </t>
+                            <t t-if="property.visio_conference_ecrans_lcd">
+                                <li>LCD</li>
+                            </t>           
+                            <t t-if="property.visio_conference_ecrans_video_proj">
+                                <li>Vidéo projecteur</li>
+                            </t>                              
+                        </ul>
+
+                    <t t-if="property.visio_conference_partage_documents">
+                        <p>Partage de documents : oui</p>                         
+                    </t>         
+
+                    </div>                 
+
+        
+            <!-- Sous-partie "Affichage dynamique"-->
+
+                    <div style="page-break-inside: avoid;">
+
+                    <br/>
+                    <h2>Affichage dynamique</h2>
+
+                    <p>
+                        <t t-if="property.is_affichage_dynamique">Vous avez une solution d'affichage dynamique</t><t t-else="">Vous n'avez pas de solution d'affichage dynamique</t>
+                    et   
+                        <t t-if="property.is_interet_affichage_dynamique">vous êtes</t><t t-else="">vous n'êtes pas</t> 
+                    intéressé par une offre
+                    </p>  
+
+                    <p>Votre fournisseur est <t t-esc="property.fournisseur_affichage_dynamique"/></p>
+                    <p>Vous avez <t t-esc="property.nb_sites_affichage_dynamique"/> sites</p>    
+
+                    <p>Type d'affichage dynamique :
+                        <t t-if="property.affichage_dynamique_ip">IP</t>
+                        <t t-if="property.affichage_dynamique_autre"><t t-esc="property.affichage_dynamique_autre"/></t>                        
+                    </p>   
+
+                    <p>Type d'écrans :</p>
+                        <ul>
+                            <t t-if="property.affichage_dynamique_ecrans_plasma">
+                                <li>Plasma</li>
+                            </t>
+                            <t t-if="property.affichage_dynamique_ecrans_lcd">
+                                <li>LCD</li>
+                            </t>           
+                            <t t-if="property.affichage_dynamique_ecrans_video">
+                                <li>Vidéo</li>
+                            </t>                              
+                        </ul>
+
+                        </div>
+                </div> 
+            </t>  
+
+
+
+            <!-- Partie "Notes"-->
+            <!--############################-->                
+
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 class="text-center">Notes</h1>
+
+                    <p><t t-esc="property.notes_complementaires"/></p>
+
+
+
+                </div> 
+            </t>  
+ 
+
+
+        </t>
+    </t>
+    </template>             
+</odoo>

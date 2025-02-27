@@ -1,0 +1,15 @@
+# Créer la table users
+POST http://localhost:1337/api/db/create-table
+Content-Type: application/json
+
+###
+
+# Insérer un utilisateur pour Odoo et XipTelecom
+POST http://localhost:1337/api/db/create-user
+Content-Type: application/json
+
+{
+  "name": "test@test.test",
+  "email": "test@test.test",
+  "password": "test"
+}

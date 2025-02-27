@@ -1,0 +1,1 @@
+Ce dossier est l'endroit ou stocker vos images.

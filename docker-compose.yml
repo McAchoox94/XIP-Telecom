@@ -1,0 +1,81 @@
+services:
+  postgres_db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: xiptelecom  # Base par défaut
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init_postgres_odoo.sql:/docker-entrypoint-initdb.d/init_postgres_odoo.sql
+    ports:
+      - "5432:5432"
+    restart: always
+
+  odoo:
+    image: odoo:18.0
+    container_name: odoo
+    depends_on:
+      - postgres_db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./logs:/var/log/odoo
+      - odoo-db-data:/var/lib/postgresql/data  # Ajout d'un volume pour la base de données
+    environment:
+      - HOST=postgres_db
+      - USER=odoo_user
+      - PASSWORD=odoo_password
+    command: odoo -d odoo --db_user=odoo_user --db_password=odoo_password -i base
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: backend
+    command: "npm run dev"
+    volumes:
+      - ./Backend:/usr/src/app
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres_db
+      - odoo
+    env_file:
+      - ./Backend/.env
+
+  frontend:
+    build:
+      context: ./Frontend
+    container_name: frontend
+    command: "npm run dev"
+    volumes:
+      - ./Frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  odoo-web-data:
+  odoo-db-data:
